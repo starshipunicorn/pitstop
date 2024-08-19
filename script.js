@@ -56,9 +56,9 @@ function populateSelection(sectionId, sectionParts) {
         let quantityInput = document.createElement('input');
         quantityInput.type = 'number';
         quantityInput.name = 'quantity';
-        quantityInput.value = 1;
-        quantityInput.min = 1;
-        quantityInput.style.marginLeft = '10px';
+        quantityInput.value = 0;  // Start at 0
+        quantityInput.min = 0;
+        quantityInput.style.width = '50px';  // Smaller box size
         quantityInput.dataset.part = part;  // Store the part name in a data attribute
         
         let div = document.createElement('div');
