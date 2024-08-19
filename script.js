@@ -127,12 +127,14 @@ function sendToDiscord() {
             console.log("Message sent to Discord successfully!");
             alert("Message sent to Discord successfully!");
         } else {
-            console.error("Failed to send message to Discord.");
-            alert("Failed to send message to Discord.");
+            return response.text().then(text => {
+                console.error("Failed to send message to Discord:", text);
+                alert("Failed to send message to Discord: " + text);
+            });
         }
     })
     .catch(error => {
         console.error("Error sending message to Discord:", error);
-        alert("Error sending message to Discord.");
+        alert("Error sending message to Discord: " + error.message);
     });
 }
