@@ -103,3 +103,21 @@ input[name="quantity"] {
     text-align: center;
     margin-left: 10px;
 }
+/* Styles for the Servicing button on the main page */
+.servicing-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #00adee;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.servicing-button:hover {
+    background-color: #007bbd;
+}
+
