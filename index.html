@@ -15,12 +15,28 @@
     <section id="calculator">
         <h2>Payment Calculator</h2>
         <form id="payment-form">
+            <label for="employee-name">Employee Name:</label>
+            <input type="text" id="employee-name" placeholder="Enter employee name" required>
+            
             <label for="total-amount">Total Amount Charged:</label>
             <input type="number" id="total-amount" placeholder="Enter amount" min="0" required>
             
-            <label>Select Parts Used:</label>
-            <div id="parts-selection">
-                <!-- Parts will be dynamically added here by JavaScript -->
+            <!-- Mechanic Section -->
+            <h3>Mechanic</h3>
+            <div id="mechanic-selection">
+                <!-- Mechanic parts will be dynamically added here -->
+            </div>
+
+            <!-- Engine Section -->
+            <h3>Engine</h3>
+            <div id="engine-selection">
+                <!-- Engine parts will be dynamically added here -->
+            </div>
+
+            <!-- Drivetrain Section -->
+            <h3>Drivetrain</h3>
+            <div id="drivetrain-selection">
+                <!-- Drivetrain parts will be dynamically added here -->
             </div>
 
             <button type="button" onclick="calculatePayout()">Calculate Payouts</button>
