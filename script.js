@@ -109,7 +109,7 @@ function confirmSendToDiscord() {
 
 function sendToDiscord() {
     const payload = {
-        content: "Test message from Pitstop Mechanic Shop"
+        content: `**Mechanic Shop Payment Calculation**\nEmployee: ${document.getElementById('employee-name').value}\n${lastCalculatedMessage}`
     };
 
     fetch(webhookURL, {
@@ -121,17 +121,17 @@ function sendToDiscord() {
     })
     .then(response => {
         if (response.ok) {
-            console.log("Test message sent to Discord successfully!");
-            alert("Test message sent to Discord successfully!");
+            console.log("Message sent to Discord successfully!");
+            alert("Message sent to Discord successfully!");
         } else {
             return response.text().then(text => {
-                console.error("Failed to send test message to Discord:", text);
-                alert("Failed to send test message to Discord: " + text);
+                console.error("Failed to send message to Discord:", text);
+                alert("Failed to send message to Discord: " + text);
             });
         }
     })
     .catch(error => {
-        console.error("Error sending test message to Discord:", error);
-        alert("Error sending test message to Discord: " + error.message);
+        console.error("Error sending message to Discord:", error);
+        alert("Error sending message to Discord: " + error.message);
     });
 }
