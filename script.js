@@ -37,7 +37,7 @@ const parts = {
     }
 };
 
-const webhookURL = "YOUR_DISCORD_WEBHOOK_URL";
+const webhookURL = "https://discord.com/api/webhooks/1274970818497089558/fszw-4X_gT_uxgHIvvZjheW3vXO0lcLo0a13_h_5gsOPvneoGq31oEu1GJcDHyKa6u0e";
 
 window.onload = function() {
     populateSelection('mechanic-selection', parts.Mechanic);
