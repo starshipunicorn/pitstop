@@ -21,6 +21,7 @@ const webhookURL = "https://discord.com/api/webhooks/1274987812651012146/jCsgYjq
 let lastServicingMessage = "";  // To store the last servicing message
 let totalServicingCost = 0;  // Total cost of selected servicing parts
 let totalServicingCostWithUpcharge = 0;  // Total cost with upcharge
+let selectedPartsList = "";  // List of selected parts
 
 window.onload = function() {
     populateServicingSelection('servicing-parts-selection', servicingParts);
@@ -56,8 +57,10 @@ function calculateServicing() {
                                .map(input => ({ part: input.dataset.part, quantity: parseInt(input.value) }));
     
     totalServicingCost = 0;
+    selectedPartsList = "";  // Clear previous selections
     selectedParts.forEach(({ part, quantity }) => {
         totalServicingCost += servicingParts[part] * quantity;
+        selectedPartsList += `${quantity} x ${part}\n`;
     });
     
     const upcharge = upchargeRates[carType];
@@ -66,6 +69,7 @@ function calculateServicing() {
     lastServicingMessage = `
 **Car Type:** ${carType.charAt(0).toUpperCase() + carType.slice(1)}
 **Total Servicing Cost (with Upcharge):** $${totalServicingCostWithUpcharge.toFixed(2)}
+**Parts Needed:**\n${selectedPartsList}
     `;
 
     document.getElementById('servicing-results').innerHTML = lastServicingMessage.replace(/\n/g, '<br>');
