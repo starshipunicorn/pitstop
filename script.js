@@ -112,22 +112,22 @@ function sendToDiscord() {
                 {
                     name: "Employee",
                     value: document.getElementById('employee-name').value,
-                    inline: true
+                    inline: false
                 },
                 {
                     name: "Total Parts Cost",
                     value: `$${totalPartsCost}`,
-                    inline: true
+                    inline: false
                 },
                 {
                     name: "Employee Payout",
                     value: `$${employeePayout}`,
-                    inline: true
+                    inline: false
                 },
                 {
                     name: "Shop Payout",
                     value: `$${shopPayout}`,
-                    inline: true
+                    inline: false
                 }
             ],
             footer: {
@@ -159,3 +159,4 @@ function sendToDiscord() {
         alert("Error sending message to Discord: " + error.message);
     });
 }
+
