@@ -38,6 +38,7 @@ const parts = {
 };
 
 const webhookURL = "https://discord.com/api/webhooks/1274970818497089558/fszw-4X_gT_uxgHIvvZjheW3vXO0lcLo0a13_h_5gsOPvneoGq31oEu1GJcDHyKa6u0e";
+let lastCalculatedMessage = "";  // To store the last calculated message
 
 window.onload = function() {
     populateSelection('mechanic-selection', parts.Mechanic);
@@ -52,14 +53,17 @@ function populateSelection(sectionId, sectionParts) {
         let label = document.createElement('label');
         label.innerText = `${part} ($${sectionParts[part]})`;
         
-        let checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.name = 'parts';
-        checkbox.value = part;
+        let quantityInput = document.createElement('input');
+        quantityInput.type = 'number';
+        quantityInput.name = 'quantity';
+        quantityInput.value = 1;
+        quantityInput.min = 1;
+        quantityInput.style.marginLeft = '10px';
+        quantityInput.dataset.part = part;  // Store the part name in a data attribute
         
         let div = document.createElement('div');
-        div.appendChild(checkbox);
         div.appendChild(label);
+        div.appendChild(quantityInput);
         
         section.appendChild(div);
     }
@@ -68,14 +72,15 @@ function populateSelection(sectionId, sectionParts) {
 function calculatePayout() {
     const employeeName = document.getElementById('employee-name').value;
     const totalAmount = parseInt(document.getElementById('total-amount').value);
-    const selectedParts = Array.from(document.querySelectorAll('input[name="parts"]:checked'))
-                               .map(cb => cb.value);
+    const selectedParts = Array.from(document.querySelectorAll('input[name="quantity"]'))
+                               .filter(input => input.value > 0)
+                               .map(input => ({ part: input.dataset.part, quantity: parseInt(input.value) }));
     
     let totalPartsCost = 0;
-    selectedParts.forEach(part => {
+    selectedParts.forEach(({ part, quantity }) => {
         for (let category in parts) {
             if (parts[category][part]) {
-                totalPartsCost += parts[category][part];
+                totalPartsCost += parts[category][part] * quantity;
             }
         }
     });
@@ -84,21 +89,30 @@ function calculatePayout() {
     const employeePayout = (remainingProfit / 2) + totalPartsCost;
     const shopPayout = remainingProfit / 2;
     
-    const results = `
-        Employee: ${employeeName}
-        Total Parts Cost: $${totalPartsCost}
-        Employee Payout: $${employeePayout}
-        Shop Payout: $${shopPayout}
+    lastCalculatedMessage = `
+**Employee:** ${employeeName}
+**Total Parts Cost:** $${totalPartsCost}
+**Employee Payout:** $${employeePayout}
+**Shop Payout:** $${shopPayout}
     `;
 
-    document.getElementById('results').innerHTML = results.replace(/\n/g, '<br>');
-
-    sendToDiscord(employeeName, results);
+    document.getElementById('results').innerHTML = lastCalculatedMessage.replace(/\n/g, '<br>');
+    document.getElementById('confirm-discord').style.display = 'block';  // Show the confirmation button
 }
 
-function sendToDiscord(employeeName, message) {
+function confirmSendToDiscord() {
+    if (confirm("Are you sure you're ready to send this to Discord?")) {
+        document.getElementById('confirm-discord').style.display = 'none';
+        document.getElementById('send-discord').style.display = 'block';
+    }
+}
+
+function sendToDiscord() {
     const payload = {
-        content: `**Mechanic Shop Payment Calculation by ${employeeName}:**\n${message}`
+        content: `\n**Mechanic Shop Payment Calculation**\n---\n${lastCalculatedMessage}\n---`,
+        embeds: [{
+            color: 0x1E90FF  // Pitstop blue color
+        }]
     };
 
     fetch(webhookURL, {
@@ -111,9 +125,14 @@ function sendToDiscord(employeeName, message) {
     .then(response => {
         if (response.ok) {
             console.log("Message sent to Discord successfully!");
+            alert("Message sent to Discord successfully!");
         } else {
             console.error("Failed to send message to Discord.");
+            alert("Failed to send message to Discord.");
         }
     })
-    .catch(error => console.error("Error sending message to Discord:", error));
+    .catch(error => {
+        console.error("Error sending message to Discord:", error);
+        alert("Error sending message to Discord.");
+    });
 }
