@@ -106,7 +106,7 @@ function calculatePayout() {
 function sendToDiscord() {
     const payload = {
         embeds: [{
-            title: "Mechanic Shop Payment Calculation",
+            title: "Pitstop Reciepts",
             color: 0x1E90FF,  // Pitstop blue color
             fields: [
                 {
