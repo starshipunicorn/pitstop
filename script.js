@@ -90,7 +90,6 @@ function calculatePayout() {
     const shopPayout = remainingProfit / 2;
     
     lastCalculatedMessage = `
-**Employee:** ${employeeName}
 **Total Parts Cost:** $${totalPartsCost}
 **Employee Payout:** $${employeePayout}
 **Shop Payout:** $${shopPayout}
@@ -109,7 +108,10 @@ function confirmSendToDiscord() {
 
 function sendToDiscord() {
     const payload = {
-        content: `**Mechanic Shop Payment Calculation**\nEmployee: ${document.getElementById('employee-name').value}\n${lastCalculatedMessage}`
+        content: `**Mechanic Shop Payment Calculation**\n---\nEmployee: ${document.getElementById('employee-name').value}\n${lastCalculatedMessage}\n---`,
+        embeds: [{
+            color: 0x1E90FF  // Pitstop blue color
+        }]
     };
 
     fetch(webhookURL, {
