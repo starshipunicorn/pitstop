@@ -9,7 +9,24 @@ const parts = {
     "Clutch Replacement": 100,
     "Air Filter": 100,
     "Spark Plug": 100,
-    "Engine Oil": 100
+    "Engine Oil": 100,
+    "Body & Cosmetic Part": 200,
+    "Extras Kit": 200,
+    "Lighting Controller": 100,
+    "Drift Tuning Kit": 200,
+    "Nitrous Install Kit": 250,
+    "Duct Tape": 250,
+    "Cleaning Kit": 50,
+    "Body Repair Kit": 1000,
+    "Respray Kit": 200,
+    "Stancer Kit": 200,
+    "Tyre Smoke Kit": 200,
+    "Semi Slick Tyres": 200,
+    "AWD Drivetrain": 1000,
+    "RWD Drivetrain": 1000,
+    "Offroad Tyres": 200,
+    "Vehicle Wheels Set": 200,
+    "Ceramic Brakes": 500
 };
 
 window.onload = function() {
