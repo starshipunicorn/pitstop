@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicing Calculator - Pitstop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Servicing Calculator</h1>
+        <a href="index.html" id="back-button">Back to Main Page</a>
+    </header>
+
+    <section id="servicing-calculator">
+        <h2>Calculate Servicing Costs</h2>
+        <form id="servicing-form">
+            <label for="car-type">Car Type:</label>
+            <select id="car-type" required>
+                <option value="standard">Standard</option>
+                <option value="sports">Sports</option>
+                <option value="super">Super</option>
+            </select>
+
+            <!-- Servicing Parts Section -->
+            <h3>Select Servicing Parts</h3>
+            <div id="servicing-parts-selection">
+                <!-- Servicing parts will be dynamically added here -->
+            </div>
+
+            <button type="button" onclick="calculateServicing()">Calculate Servicing Cost</button>
+        </form>
+
+        <div id="servicing-results">
+            <!-- Results will be displayed here -->
+        </div>
+
+        <!-- Send to Discord Button -->
+        <button type="button" id="send-servicing-discord" onclick="sendServicingToDiscord()" style="display:none;">Send to Discord</button>
+    </section>
+
+    <script src="servicing.js"></script>
+</body>
+</html>
