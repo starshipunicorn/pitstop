@@ -29,6 +29,8 @@ const parts = {
     "Ceramic Brakes": 500
 };
 
+const webhookURL = "https://discord.com/api/webhooks/1274970818497089558/fszw-4X_gT_uxgHIvvZjheW3vXO0lcLo0a13_h_5gsOPvneoGq31oEu1GJcDHyKa6u0e";
+
 window.onload = function() {
     const partsSelection = document.getElementById('parts-selection');
     
@@ -50,6 +52,7 @@ window.onload = function() {
 };
 
 function calculatePayout() {
+    const employeeName = document.getElementById('employee-name').value;
     const totalAmount = parseInt(document.getElementById('total-amount').value);
     const selectedParts = Array.from(document.querySelectorAll('input[name="parts"]:checked'))
                                .map(cb => cb.value);
@@ -63,9 +66,36 @@ function calculatePayout() {
     const employeePayout = (remainingProfit / 2) + totalPartsCost;
     const shopPayout = remainingProfit / 2;
     
-    document.getElementById('results').innerHTML = `
-        <p>Total Parts Cost: $${totalPartsCost}</p>
-        <p>Employee Payout: $${employeePayout}</p>
-        <p>Shop Payout: $${shopPayout}</p>
+    const results = `
+        Employee: ${employeeName}
+        Total Parts Cost: $${totalPartsCost}
+        Employee Payout: $${employeePayout}
+        Shop Payout: $${shopPayout}
     `;
+
+    document.getElementById('results').innerHTML = results.replace(/\n/g, '<br>');
+
+    sendToDiscord(employeeName, results);
+}
+
+function sendToDiscord(employeeName, message) {
+    const payload = {
+        content: `**Mechanic Shop Payment Calculation by ${employeeName}:**\n${message}`
+    };
+
+    fetch(webhookURL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("Message sent to Discord successfully!");
+        } else {
+            console.error("Failed to send message to Discord.");
+        }
+    })
+    .catch(error => console.error("Error sending message to Discord:", error));
 }
