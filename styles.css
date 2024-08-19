@@ -32,28 +32,37 @@ h2 {
     display: inline-block;
     width: 100%;
     max-width: 500px;
+    text-align: left;
 }
 
 form {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 }
 
 label {
     margin-top: 10px;
     margin-bottom: 5px;
-    text-align: left;
 }
 
-input, button {
+input[type="text"],
+input[type="number"] {
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 5px;
     border: none;
     font-size: 1rem;
+    width: 100%;
+    max-width: 450px;
 }
 
 button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
     background-color: #00adee;
     color: #ffffff;
     cursor: pointer;
@@ -66,4 +75,31 @@ button:hover {
 #results {
     margin-top: 20px;
     font-size: 1.2rem;
+}
+
+#mechanic-selection,
+#engine-selection,
+#drivetrain-selection {
+    margin-bottom: 20px;
+}
+
+#mechanic-selection div,
+#engine-selection div,
+#drivetrain-selection div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+#mechanic-selection div label,
+#engine-selection div label,
+#drivetrain-selection div label {
+    flex: 1;
+}
+
+input[name="quantity"] {
+    width: 50px;
+    text-align: center;
+    margin-left: 10px;
 }
