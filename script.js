@@ -39,6 +39,9 @@ const parts = {
 
 const webhookURL = "https://discord.com/api/webhooks/1274970818497089558/fszw-4X_gT_uxgHIvvZjheW3vXO0lcLo0a13_h_5gsOPvneoGq31oEu1GJcDHyKa6u0e";
 let lastCalculatedMessage = "";  // To store the last calculated message
+let totalPartsCost = 0;  // Total cost of selected parts
+let employeePayout = 0;  // Employee's payout amount
+let shopPayout = 0;  // Shop's payout amount
 
 window.onload = function() {
     populateSelection('mechanic-selection', parts.Mechanic);
@@ -76,7 +79,7 @@ function calculatePayout() {
                                .filter(input => input.value > 0)
                                .map(input => ({ part: input.dataset.part, quantity: parseInt(input.value) }));
     
-    let totalPartsCost = 0;
+    totalPartsCost = 0;
     selectedParts.forEach(({ part, quantity }) => {
         for (let category in parts) {
             if (parts[category][part]) {
@@ -86,8 +89,8 @@ function calculatePayout() {
     });
     
     const remainingProfit = totalAmount - totalPartsCost;
-    const employeePayout = (remainingProfit / 2) + totalPartsCost;
-    const shopPayout = remainingProfit / 2;
+    employeePayout = (remainingProfit / 2) + totalPartsCost;
+    shopPayout = remainingProfit / 2;
     
     lastCalculatedMessage = `
 **Employee:** ${employeeName}
@@ -97,14 +100,7 @@ function calculatePayout() {
     `;
 
     document.getElementById('results').innerHTML = lastCalculatedMessage.replace(/\n/g, '<br>');
-    document.getElementById('confirm-discord').style.display = 'block';  // Show the confirmation button
-}
-
-function confirmSendToDiscord() {
-    if (confirm("Are you sure you're ready to send this to Discord?")) {
-        document.getElementById('confirm-discord').style.display = 'none';
-        document.getElementById('send-discord').style.display = 'block';
-    }
+    document.getElementById('send-discord').style.display = 'block';  // Show the send to Discord button
 }
 
 function sendToDiscord() {
