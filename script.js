@@ -106,7 +106,7 @@ function calculatePayout() {
 function sendToDiscord() {
     const payload = {
         embeds: [{
-            title: "Pitstop Reciepts",
+            title: "Pitstop Receipts",
             color: 0x1E90FF,  // Pitstop blue color
             fields: [
                 {
