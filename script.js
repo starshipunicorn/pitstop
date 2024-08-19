@@ -90,6 +90,7 @@ function calculatePayout() {
     const shopPayout = remainingProfit / 2;
     
     lastCalculatedMessage = `
+**Employee:** ${employeeName}
 **Total Parts Cost:** $${totalPartsCost}
 **Employee Payout:** $${employeePayout}
 **Shop Payout:** $${shopPayout}
@@ -108,9 +109,35 @@ function confirmSendToDiscord() {
 
 function sendToDiscord() {
     const payload = {
-        content: `**Mechanic Shop Payment Calculation**\n---\nEmployee: ${document.getElementById('employee-name').value}\n${lastCalculatedMessage}\n---`,
         embeds: [{
-            color: 0x1E90FF  // Pitstop blue color
+            title: "Mechanic Shop Payment Calculation",
+            description: lastCalculatedMessage,
+            color: 0x1E90FF,  // Pitstop blue color
+            fields: [
+                {
+                    name: "Employee",
+                    value: document.getElementById('employee-name').value,
+                    inline: true
+                },
+                {
+                    name: "Total Parts Cost",
+                    value: `$${totalPartsCost}`,
+                    inline: true
+                },
+                {
+                    name: "Employee Payout",
+                    value: `$${employeePayout}`,
+                    inline: true
+                },
+                {
+                    name: "Shop Payout",
+                    value: `$${shopPayout}`,
+                    inline: true
+                }
+            ],
+            footer: {
+                text: "Pitstop Mechanic Shop",
+            }
         }]
     };
 
