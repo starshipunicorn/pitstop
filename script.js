@@ -107,7 +107,6 @@ function sendToDiscord() {
     const payload = {
         embeds: [{
             title: "Mechanic Shop Payment Calculation",
-            description: lastCalculatedMessage,
             color: 0x1E90FF,  // Pitstop blue color
             fields: [
                 {
