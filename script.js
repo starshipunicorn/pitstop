@@ -1,42 +1,56 @@
 const parts = {
-    "Repair Kit": 500,
-    "Suspension Parts": 200,
-    "Tyre Replacement": 200,
-    "Brake Pad Replacement": 100,
-    "EV Motor": 100,
-    "EV Battery": 100,
-    "EV Coolant": 100,
-    "Clutch Replacement": 100,
-    "Air Filter": 100,
-    "Spark Plug": 100,
-    "Engine Oil": 100,
-    "Body & Cosmetic Part": 200,
-    "Extras Kit": 200,
-    "Lighting Controller": 100,
-    "Drift Tuning Kit": 200,
-    "Nitrous Install Kit": 250,
-    "Duct Tape": 250,
-    "Cleaning Kit": 50,
-    "Body Repair Kit": 1000,
-    "Respray Kit": 200,
-    "Stancer Kit": 200,
-    "Tyre Smoke Kit": 200,
-    "Semi Slick Tyres": 200,
-    "AWD Drivetrain": 1000,
-    "RWD Drivetrain": 1000,
-    "Offroad Tyres": 200,
-    "Vehicle Wheels Set": 200,
-    "Ceramic Brakes": 500
+    "Mechanic": {
+        "Repair Kit": 500,
+        "Suspension Parts": 200,
+        "Tyre Replacement": 200,
+        "Brake Pad Replacement": 100,
+        "Body & Cosmetic Part": 200,
+        "Extras Kit": 200,
+        "Lighting Controller": 100,
+        "Drift Tuning Kit": 200,
+        "Nitrous Install Kit": 250,
+        "Duct Tape": 250,
+        "Cleaning Kit": 50,
+        "Body Repair Kit": 1000,
+        "Respray Kit": 200,
+        "Stancer Kit": 200,
+        "Tyre Smoke Kit": 200,
+        "Ceramic Brakes": 500
+    },
+    "Engine": {
+        "EV Motor": 100,
+        "EV Battery": 100,
+        "EV Coolant": 100,
+        "Clutch Replacement": 100,
+        "Air Filter": 100,
+        "Spark Plug": 100,
+        "Engine Oil": 100
+    },
+    "Drivetrain": {
+        "Semi Slick Tyres": 200,
+        "AWD Drivetrain": 1000,
+        "RWD Drivetrain": 1000,
+        "Offroad Tyres": 200,
+        "FWD Drivetrain": 1000,
+        "Slick Tyres": 200,
+        "Vehicle Wheels Set": 200
+    }
 };
 
-const webhookURL = "https://discord.com/api/webhooks/1274970818497089558/fszw-4X_gT_uxgHIvvZjheW3vXO0lcLo0a13_h_5gsOPvneoGq31oEu1GJcDHyKa6u0e";
+const webhookURL = "YOUR_DISCORD_WEBHOOK_URL";
 
 window.onload = function() {
-    const partsSelection = document.getElementById('parts-selection');
+    populateSelection('mechanic-selection', parts.Mechanic);
+    populateSelection('engine-selection', parts.Engine);
+    populateSelection('drivetrain-selection', parts.Drivetrain);
+};
+
+function populateSelection(sectionId, sectionParts) {
+    const section = document.getElementById(sectionId);
     
-    for (let part in parts) {
+    for (let part in sectionParts) {
         let label = document.createElement('label');
-        label.innerText = `${part} ($${parts[part]})`;
+        label.innerText = `${part} ($${sectionParts[part]})`;
         
         let checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
@@ -47,9 +61,9 @@ window.onload = function() {
         div.appendChild(checkbox);
         div.appendChild(label);
         
-        partsSelection.appendChild(div);
+        section.appendChild(div);
     }
-};
+}
 
 function calculatePayout() {
     const employeeName = document.getElementById('employee-name').value;
@@ -59,7 +73,11 @@ function calculatePayout() {
     
     let totalPartsCost = 0;
     selectedParts.forEach(part => {
-        totalPartsCost += parts[part];
+        for (let category in parts) {
+            if (parts[category][part]) {
+                totalPartsCost += parts[category][part];
+            }
+        }
     });
     
     const remainingProfit = totalAmount - totalPartsCost;
