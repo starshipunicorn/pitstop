@@ -73,11 +73,12 @@ function calculateServicing() {
 }
 
 function sendServicingToDiscord() {
+    const employeeName = document.getElementById('employee-name').value;
     const payload = {
         embeds: [{
             title: "Servicing Cost Calculation",
             color: 0x1E90FF,  // Pitstop blue color
-            description: lastServicingMessage,
+            description: `**Employee:** ${employeeName}\n${lastServicingMessage}`,
             footer: {
                 text: "Pitstop Mechanic Shop",
             }
