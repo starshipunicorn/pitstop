@@ -37,7 +37,7 @@ const parts = {
     }
 };
 
-const webhookURL = "https://discord.com/api/webhooks/1274970818497089558/fszw-4X_gT_uxgHIvvZjheW3vXO0lcLo0a13_h_5gsOPvneoGq31oEu1GJcDHyKa6u0e";
+const webhookURL = "https://discord.com/api/webhooks/1275317660342681600/KFvhixnfqDK_JGvDVdHZ24-VP5grn9gC6Ol66dMaE4xYWWn7Lhbp7IuuRQQjoH-OKSxI";
 let lastCalculatedMessage = "";  // To store the last calculated message
 let totalPartsCost = 0;  // Total cost of selected parts
 let employeePayout = 0;  // Employee's payout amount
