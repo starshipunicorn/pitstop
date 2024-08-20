@@ -17,7 +17,7 @@ const upchargeRates = {
     "super": 0.25
 };
 
-const webhookURL = "https://discord.com/api/webhooks/1274987812651012146/jCsgYjqv7rp4hCdoi5O-IsCXzRDCFeIruIMZ4zl24OtrsFLQLzHeU36qLQtJrqHoitUy";
+const webhookURL = "https://discord.com/api/webhooks/1275317906812698716/m4NStCS0kKhus3VwRSfUfOFm0D1z-q7FvwjYptr8uWC09T1mhBfBa-WOMYz5GR0tBiS9";
 let lastServicingMessage = "";  // To store the last servicing message
 let totalServicingCost = 0;  // Total cost of selected servicing parts
 let totalServicingCostWithUpcharge = 0;  // Total cost with upcharge
