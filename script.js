@@ -92,8 +92,8 @@ function calculatePayout() {
     });
     
     const remainingProfit = totalAmount - totalPartsCost;
-    employeePayout = (remainingProfit / 2) + totalPartsCost;
-    shopPayout = remainingProfit / 2;
+    employeePayout = (remainingProfit * 0.8) + totalPartsCost;  // 80% payout to employee
+    shopPayout = remainingProfit * 0.2;  // 20% payout to shop
     
     lastCalculatedMessage = `
 **Employee:** ${employeeName}
@@ -162,4 +162,3 @@ function sendToDiscord() {
         alert("Error sending message to Discord: " + error.message);
     });
 }
-
