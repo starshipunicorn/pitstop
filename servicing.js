@@ -11,8 +11,11 @@ const servicingParts = {
     "Engine Oil": 500
 };
 
+// All upcharge rates set to 54%
 const upchargeRates = {
-    "standard rate": 0.54
+    "standard": 0.54,
+    "sports": 0.54,
+    "super": 0.54
 };
 
 const serviceFee = 2000; // Fixed service fee added to the total cost
@@ -63,7 +66,7 @@ function calculateServicing() {
         selectedPartsList += `${quantity} x ${part}\n`;
     });
     
-    const upcharge = upchargeRates[carType];
+    const upcharge = upchargeRates[carType];  // Apply the 54% upcharge rate
     totalServicingCostWithUpcharge = totalServicingCost + (totalServicingCost * upcharge);
     
     lastServicingMessage = `
