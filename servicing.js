@@ -1,14 +1,14 @@
 const servicingParts = {
-    "Suspension Parts": 200,
-    "Tyre Replacement": 200,
-    "Brake Pad Replacement": 100,
-    "EV Motor": 100,
-    "EV Battery": 100,
-    "EV Coolant": 100,
-    "Clutch Replacement": 100,
-    "Air Filter": 100,
-    "Spark Plug": 100,
-    "Engine Oil": 100
+    "Suspension Parts": 500,
+    "Tyre Replacement": 500,
+    "Brake Pad Replacement": 500,
+    "EV Motor": 2500,
+    "EV Battery": 2500,
+    "EV Coolant": 2500,
+    "Clutch Replacement": 500,
+    "Air Filter": 500,
+    "Spark Plug": 500,
+    "Engine Oil": 500
 };
 
 const upchargeRates = {
