@@ -1,30 +1,32 @@
 const parts = {
     "Mechanic": {
-        "Repair Kit": 500,
-        "Suspension Parts": 200,
+        "Repair Kit": 1000,
+        "Suspension Parts": 500,
         "Tyre Replacement": 200,
-        "Brake Pad Replacement": 100,
-        "Body & Cosmetic Part": 200,
+        "Brake Pad Replacement": 500,
+        "Body & Cosmetic Part": 350,
         "Extras Kit": 200,
-        "Lighting Controller": 100,
+        "Lighting Controller": 200,
         "Drift Tuning Kit": 200,
         "Nitrous Install Kit": 250,
         "Duct Tape": 250,
         "Cleaning Kit": 50,
         "Body Repair Kit": 1000,
         "Respray Kit": 200,
-        "Stancer Kit": 200,
+        "Stancer Kit": 1000,
         "Tyre Smoke Kit": 200,
-        "Ceramic Brakes": 500
+        "Ceramic Brakes": 500,
+        "Mech Components": 3500
     },
     "Engine": {
-        "EV Motor": 100,
-        "EV Battery": 100,
-        "EV Coolant": 100,
-        "Clutch Replacement": 100,
-        "Air Filter": 100,
-        "Spark Plug": 100,
-        "Engine Oil": 100
+        "EV Motor": 2500,
+        "EV Battery": 2500,
+        "EV Coolant": 2500,
+        "Clutch Replacement": 500,
+        "Air Filter": 500,
+        "Spark Plug": 500,
+        "Engine Oil": 500,
+        "Stage 1 Engine": 6500
     },
     "Drivetrain": {
         "Semi Slick Tyres": 200,
@@ -33,7 +35,8 @@ const parts = {
         "Offroad Tyres": 200,
         "FWD Drivetrain": 1000,
         "Slick Tyres": 200,
-        "Vehicle Wheels Set": 200
+        "Vehicle Wheels Set": 200,
+        "Tyre Replacement": 500
     }
 };
 
