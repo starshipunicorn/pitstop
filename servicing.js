@@ -11,14 +11,10 @@ const servicingParts = {
     "Engine Oil": 500
 };
 
-// All upcharge rates set to 54%
-const upchargeRates = {
-    "standard": 0.54,
-    "sports": 0.54,
-    "super": 0.54
-};
+// Uniform upcharge rate of 54%
+const upchargeRate = 0.54;
 
-const serviceFee = 2000; // Fixed service fee added to the total cost
+const serviceFee = 2000; // Fixed service fee added after the upcharge
 
 const webhookURL = "https://discord.com/api/webhooks/1275317906812698716/m4NStCS0kKhus3VwRSfUfOFm0D1z-q7FvwjYptr8uWC09T1mhBfBa-WOMYz5GR0tBiS9";
 let lastServicingMessage = "";  // To store the last servicing message
@@ -59,20 +55,22 @@ function calculateServicing() {
                                .filter(input => input.value > 0)
                                .map(input => ({ part: input.dataset.part, quantity: parseInt(input.value) }));
     
-    totalServicingCost = serviceFee;  // Start with the fixed service fee
+    totalServicingCost = 0;  // Start with 0
     selectedPartsList = "";  // Clear previous selections
     selectedParts.forEach(({ part, quantity }) => {
         totalServicingCost += servicingParts[part] * quantity;
         selectedPartsList += `${quantity} x ${part}\n`;
     });
     
-    const upcharge = upchargeRates[carType];  // Apply the 54% upcharge rate
-    totalServicingCostWithUpcharge = totalServicingCost + (totalServicingCost * upcharge);
+    // Apply the 54% upcharge first
+    totalServicingCostWithUpcharge = totalServicingCost + (totalServicingCost * upchargeRate);
+    
+    // Add the fixed $2000 service fee after the upcharge
+    const finalTotalCost = totalServicingCostWithUpcharge + serviceFee;
     
     lastServicingMessage = `
 **Car Type:** ${carType.charAt(0).toUpperCase() + carType.slice(1)}
-**Service Fee:** $${serviceFee.toFixed(2)}
-**Total Servicing Cost (with Upcharge):** $${totalServicingCostWithUpcharge.toFixed(2)}
+**Total Cost (with 54% Upcharge and $2000 Service Fee):** $${finalTotalCost.toFixed(2)}
 **Parts Needed:**\n${selectedPartsList}
     `;
 
