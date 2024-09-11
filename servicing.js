@@ -12,10 +12,10 @@ const servicingParts = {
 };
 
 const upchargeRates = {
-    "standard": 0.15,
-    "sports": 0.20,
-    "super": 0.25
+    "standard rate": 0.54
 };
+
+const serviceFee = 2000; // Fixed service fee added to the total cost
 
 const webhookURL = "https://discord.com/api/webhooks/1275317906812698716/m4NStCS0kKhus3VwRSfUfOFm0D1z-q7FvwjYptr8uWC09T1mhBfBa-WOMYz5GR0tBiS9";
 let lastServicingMessage = "";  // To store the last servicing message
@@ -56,7 +56,7 @@ function calculateServicing() {
                                .filter(input => input.value > 0)
                                .map(input => ({ part: input.dataset.part, quantity: parseInt(input.value) }));
     
-    totalServicingCost = 0;
+    totalServicingCost = serviceFee;  // Start with the fixed service fee
     selectedPartsList = "";  // Clear previous selections
     selectedParts.forEach(({ part, quantity }) => {
         totalServicingCost += servicingParts[part] * quantity;
@@ -68,6 +68,7 @@ function calculateServicing() {
     
     lastServicingMessage = `
 **Car Type:** ${carType.charAt(0).toUpperCase() + carType.slice(1)}
+**Service Fee:** $${serviceFee.toFixed(2)}
 **Total Servicing Cost (with Upcharge):** $${totalServicingCostWithUpcharge.toFixed(2)}
 **Parts Needed:**\n${selectedPartsList}
     `;
